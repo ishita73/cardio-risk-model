@@ -24,6 +24,11 @@ Cardiovascular disease is the leading cause of mortality worldwide, accounting f
 
 This project builds a supervised binary classification system to predict the **presence or absence of heart disease** from 13 clinical and demographic features. The goal is not only predictive accuracy but a **reproducible, modular pipeline** that mirrors real-world clinical ML development practices.
 
+**Classification Task**
+
+- **1** → High Risk
+- **0** → Low / No Risk
+
 ---
 
 ## Dataset
@@ -87,6 +92,42 @@ heart-disease-prediction/
 ├── requirements.txt               # Python dependencies
 └── README.md
 ```
+---
+## 🏛️ Project Architecture
+
+```mermaid
+flowchart LR
+    A[Clinical Dataset] --> B[Data Cleaning]
+    B --> C[Feature Engineering]
+    C --> D[Exploratory Data Analysis]
+    D --> E[Model Training]
+    E --> F[Model Evaluation]
+    F --> G[Risk Prediction]
+```
+
+---
+
+## 🔄 Machine Learning Workflow
+
+```mermaid
+graph TD
+
+A[Raw Dataset]
+--> B[Data Cleaning]
+
+B --> C[Feature Engineering]
+
+C --> D[Exploratory Data Analysis]
+
+D --> E[Model Training]
+
+E --> F[Performance Evaluation]
+
+F --> G[Risk Prediction]
+```
+
+
+
 
 ---
 
@@ -238,12 +279,3 @@ python main.py --no-save
 
 ---
 
-## Citation
-
-> Janosi, A., Steinbrunn, W., Pfisterer, M., & Detrano, R. (1988).
-> *Heart Disease* [Dataset]. UCI Machine Learning Repository.
-> https://doi.org/10.24432/C52P4X
-
----
-
-*Built as part of an academic ML portfolio — ECE, JIIT Noida*
