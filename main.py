@@ -1,10 +1,5 @@
 """
-main.py
--------
-CLI entry point for the Heart Disease Prediction pipeline.
-
 Usage
------
     python main.py --data data/heart_disease_uci.csv --model random_forest
     python main.py --data data/heart_disease_uci.csv --model logistic_regression
     python main.py --data data/heart_disease_uci.csv --model svm
@@ -74,13 +69,13 @@ def main():
     print(BANNER)
     args = parse_args()
 
-    # ── 1. Data validation ─────────────────────────────────────────────────
+    #  Data validation 
     if not os.path.isfile(args.data):
         print(f"[ERROR] Dataset not found: {args.data}")
         print("        Place the CSV in the data/ folder or pass --data <path>")
         sys.exit(1)
 
-    # ── 2. Preprocessing ───────────────────────────────────────────────────
+    #  Preprocessing
     print("\n[STEP 1/4] Preprocessing data ...")
     X_train, X_test, y_train, y_test, scaler, feature_names = preprocess(
         filepath=args.data,
@@ -88,17 +83,17 @@ def main():
         random_state=args.seed,
     )
 
-    # ── 3. Model training ──────────────────────────────────────────────────
+    #  Model training
     print(f"\n[STEP 2/4] Training model: {args.model} ...")
     clf = get_model(args.model)
     clf = train_model(clf, X_train, y_train)
 
-    # ── 4. Evaluation ──────────────────────────────────────────────────────
+    # Evaluation 
     print("\n[STEP 3/4] Evaluating on held-out test set ...")
     metrics = evaluate_model(clf, X_test, y_test)
     print_report(metrics, model_name=args.model.replace("_", " ").title())
 
-    # ── 5. Visualisations & artefacts ──────────────────────────────────────
+    # Visualisations & artefacts
     print("[STEP 4/4] Generating output plots ...")
     plot_confusion_matrix(clf, X_test, y_test)
     plot_roc_curve(clf, X_test, y_test)
