@@ -1,20 +1,3 @@
-"""
-eda.ipynb  (source — rendered as a .py script for clarity)
------------------------------------------------------------
-Exploratory Data Analysis for the UCI Heart Disease dataset.
-
-Sections
---------
-1. Data Loading & Overview
-2. Univariate Distributions
-3. Feature–Target Correlations
-4. Pairplot (subset of features)
-5. Missing Value Summary
-
-Run from the project root after placing the CSV in data/.
-"""
-
-# ── Imports ─────────────────────────────────────────────────────────────────
 import sys
 sys.path.insert(0, "..")
 
@@ -26,7 +9,6 @@ import matplotlib.pyplot as plt
 
 from src.preprocessing import load_data, clean_data
 
-# ── 1. Data Overview ─────────────────────────────────────────────────────────
 df_raw = load_data("../data/heart_disease_uci.csv")
 print("Raw shape:", df_raw.shape)
 print(df_raw.head())
@@ -38,7 +20,6 @@ print("\nCleaned shape:", df.shape)
 print("\nDescriptive statistics:")
 print(df.describe().round(2))
 
-# ── 2. Class Balance ─────────────────────────────────────────────────────────
 counts = df["target"].value_counts()
 fig, ax = plt.subplots(figsize=(4, 4))
 ax.bar(["No Disease", "Disease"], counts.values, color=["steelblue", "tomato"])
@@ -49,7 +30,7 @@ plt.savefig("../outputs/eda_class_distribution.png", dpi=150)
 plt.close()
 print("\nSaved: outputs/eda_class_distribution.png")
 
-# ── 3. Correlation Heatmap ───────────────────────────────────────────────────
+# Correlation Heatmap 
 import matplotlib.patches as mpatches
 
 corr = df.corr(numeric_only=True)
@@ -66,7 +47,7 @@ plt.savefig("../outputs/eda_correlation_heatmap.png", dpi=150)
 plt.close()
 print("Saved: outputs/eda_correlation_heatmap.png")
 
-# ── 4. Feature Distributions by Class ───────────────────────────────────────
+# Feature Distributions 
 continuous_features = ["age", "trestbps", "chol", "thalach", "oldpeak"]
 
 fig, axes = plt.subplots(1, len(continuous_features), figsize=(16, 4))
